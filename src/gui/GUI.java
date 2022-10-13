@@ -23,7 +23,7 @@ public class GUI{
     private JLabel labelFigura;
     private JLabel labelPerimetro;
     private JLabel labelArea;
-   
+    //sus test
     private JFrame frame;
    
     private JButton selezionaQuadrato;
