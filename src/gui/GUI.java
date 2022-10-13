@@ -23,7 +23,7 @@ public class GUI implements ActionListener{
     private JLabel labelFigura;
     private JLabel labelPerimetro;
     private JLabel labelArea;
-   
+    //sus test
     private JFrame frame;
    
     private JButton selezionaQuadrato;
