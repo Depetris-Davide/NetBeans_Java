@@ -6,7 +6,7 @@ import java.awt.im.InputContext;
 import static java.lang.Integer.parseInt;
 import javax.swing.*;
 
-public class GUI implements ActionListener{
+public class GUI{
     private String Figura;
     private double lato;
    
@@ -32,29 +32,91 @@ public class GUI implements ActionListener{
     private JButton selezionaCerchio;
     private JButton calcoloPerimetro;
     private JButton calcoloArea;
+    private JButton tornaIndietro;
    
     private GridBagConstraints c;
    
-    public GUI(){
+    GUI(){
         frame = new JFrame();
         textFieldLato = new JTextField(10);
         textFieldBase = new JTextField(10);
         textFieldAltezza = new JTextField(10);
         textFieldRaggio = new JTextField(10);
        
-        c = new GridBagConstraints();
-       
         selezionaRettangolo = new JButton("Rettangolo");
-        selezionaRettangolo.addActionListener(this);
-       
+        selezionaRettangolo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                selezionaQuadrato.setEnabled(false);
+                selezionaCerchio.setEnabled(false);
+                selezionaTriangolo.setEnabled(false);
+                
+                labelLato.setEnabled(false);
+                labelRaggio.setEnabled(false);
+            }
+        });
+        
+        tornaIndietro = new JButton("Torna Al Menu");
+        tornaIndietro.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                selezionaQuadrato.setEnabled(true);
+                selezionaRettangolo.setEnabled(true);
+                selezionaCerchio.setEnabled(true);
+                selezionaTriangolo.setEnabled(true);
+                
+                labelBase.setEnabled(true);
+                labelAltezza.setEnabled(true);
+                labelRaggio.setEnabled(true);
+                labelLato.setEnabled(true);
+                
+                labelLato.setText("Lato :");
+                labelBase.setText("Base:");
+                labelAltezza.setText("Altezza:");
+            }
+        });
+        
         selezionaCerchio = new JButton("Cerchio");
-        selezionaCerchio.addActionListener(this);
+        selezionaCerchio.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                selezionaQuadrato.setEnabled(false);
+                selezionaRettangolo.setEnabled(false);
+                selezionaTriangolo.setEnabled(false);
+                
+                labelBase.setEnabled(false);
+                labelAltezza.setEnabled(false);
+                labelLato.setEnabled(false);
+            }
+        });
        
         selezionaQuadrato = new JButton("Quadrato");
-        selezionaQuadrato.addActionListener(this);
+        selezionaQuadrato.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                selezionaRettangolo.setEnabled(false);
+                selezionaCerchio.setEnabled(false);
+                selezionaTriangolo.setEnabled(false);
+                
+                labelBase.setEnabled(false);
+                labelAltezza.setEnabled(false);
+                labelRaggio.setEnabled(false);
+            }
+        });
        
         selezionaTriangolo = new JButton("Triangolo");
-        selezionaTriangolo.addActionListener(this);
+        selezionaTriangolo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                labelFigura.setText("Figura: " + e.getActionCommand());
+                Figura = e.getActionCommand();
+                
+                selezionaQuadrato.setEnabled(false);
+                selezionaCerchio.setEnabled(false);
+                selezionaRettangolo.setEnabled(false);
+                
+                labelRaggio.setEnabled(false);
+                
+                labelLato.setText("Lato 1:");
+                labelBase.setText("Lato 2:");
+                labelAltezza.setText("Lato 3:");
+            }
+        });
        
         calcoloPerimetro = new JButton("Calcola Perimetro");
         calcoloPerimetro.addActionListener(new ActionListener(){
@@ -67,8 +129,14 @@ public class GUI implements ActionListener{
                        
                         switch(Figura){
                             case "Quadrato":
+                                textFieldBase.setEnabled(false);
+                                textFieldAltezza.setEnabled(false);
+                                textFieldRaggio.setEnabled(false);
                                 perimetro = lato*4;
                                 labelPerimetro.setText("Perimetro: " + perimetro);
+                                textFieldBase.setEnabled(true);
+                                textFieldAltezza.setEnabled(true);
+                                textFieldRaggio.setEnabled(true);
                             break;
                             case "Rettangolo":
                                 perimetro = (base+altezza)*2;
@@ -91,12 +159,19 @@ public class GUI implements ActionListener{
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                         double area;
- 
+                        
+                        textFieldLato.setEnabled(false);
+                        textFieldBase.setEnabled(false);
+                        textFieldAltezza.setEnabled(false);
+                        textFieldRaggio.setEnabled(false);
+                        
                         switch(Figura){
                             case "Quadrato":
                                 double lato = Double.parseDouble(textFieldLato.getText());
                                 area = lato*lato;
                                 labelArea.setText("Area: " + area);
+                                
+                                
                             break;
                             case "Rettangolo":
                                 double base = Double.parseDouble(textFieldBase.getText());
@@ -153,6 +228,7 @@ public class GUI implements ActionListener{
         panel.add(textFieldAltezza);
         panel.add(labelRaggio);
         panel.add(textFieldRaggio);
+        panel.add(tornaIndietro);
        
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -163,11 +239,5 @@ public class GUI implements ActionListener{
    
     public static void main(String[] args) {
         new GUI();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent a) {
-        labelFigura.setText("Figura: " + a.getActionCommand());
-        Figura = a.getActionCommand();
     }
 }
