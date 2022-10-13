@@ -23,7 +23,7 @@ public class GUI{
     private JLabel labelFigura;
     private JLabel labelPerimetro;
     private JLabel labelArea;
-    //sus test
+   
     private JFrame frame;
    
     private JButton selezionaQuadrato;
@@ -46,12 +46,18 @@ public class GUI{
         selezionaRettangolo = new JButton("Rettangolo");
         selezionaRettangolo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                labelFigura.setText("Figura: " + e.getActionCommand());
+                Figura = e.getActionCommand();
+                
                 selezionaQuadrato.setEnabled(false);
                 selezionaCerchio.setEnabled(false);
                 selezionaTriangolo.setEnabled(false);
                 
                 labelLato.setEnabled(false);
                 labelRaggio.setEnabled(false);
+                
+                textFieldLato.setEnabled(false);
+                textFieldRaggio.setEnabled(false);
             }
         });
         
@@ -68,6 +74,11 @@ public class GUI{
                 labelRaggio.setEnabled(true);
                 labelLato.setEnabled(true);
                 
+                textFieldLato.setEnabled(true);
+                textFieldRaggio.setEnabled(true);
+                textFieldBase.setEnabled(true);
+                textFieldAltezza.setEnabled(true);
+                
                 labelLato.setText("Lato :");
                 labelBase.setText("Base:");
                 labelAltezza.setText("Altezza:");
@@ -77,6 +88,9 @@ public class GUI{
         selezionaCerchio = new JButton("Cerchio");
         selezionaCerchio.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                labelFigura.setText("Figura: " + e.getActionCommand());
+                Figura = e.getActionCommand();
+                
                 selezionaQuadrato.setEnabled(false);
                 selezionaRettangolo.setEnabled(false);
                 selezionaTriangolo.setEnabled(false);
@@ -84,12 +98,19 @@ public class GUI{
                 labelBase.setEnabled(false);
                 labelAltezza.setEnabled(false);
                 labelLato.setEnabled(false);
+                
+                textFieldBase.setEnabled(false);
+                textFieldAltezza.setEnabled(false);
+                textFieldLato.setEnabled(false);
             }
         });
        
         selezionaQuadrato = new JButton("Quadrato");
         selezionaQuadrato.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                labelFigura.setText("Figura: " + e.getActionCommand());
+                Figura = e.getActionCommand();
+                
                 selezionaRettangolo.setEnabled(false);
                 selezionaCerchio.setEnabled(false);
                 selezionaTriangolo.setEnabled(false);
@@ -97,6 +118,10 @@ public class GUI{
                 labelBase.setEnabled(false);
                 labelAltezza.setEnabled(false);
                 labelRaggio.setEnabled(false);
+                
+                textFieldBase.setEnabled(false);
+                textFieldAltezza.setEnabled(false);
+                textFieldRaggio.setEnabled(false);
             }
         });
        
@@ -111,6 +136,8 @@ public class GUI{
                 selezionaRettangolo.setEnabled(false);
                 
                 labelRaggio.setEnabled(false);
+                
+                textFieldRaggio.setEnabled(false);
                 
                 labelLato.setText("Lato 1:");
                 labelBase.setText("Lato 2:");
