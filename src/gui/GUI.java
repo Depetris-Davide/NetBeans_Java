@@ -14,12 +14,14 @@ public class GUI{
     private JLabel labelBase;
     private JLabel labelAltezza;
     private JLabel labelRaggio;
-   
+    private JLabel labelBaseTriangolo;
+    
     private JTextField textFieldLato;
     private JTextField textFieldBase;
     private JTextField textFieldAltezza;
     private JTextField textFieldRaggio;
-
+    private JTextField textFieldBaseTriangolo;
+    
     private JLabel labelFigura;
     private JLabel labelPerimetro;
     private JLabel labelArea;
@@ -42,6 +44,7 @@ public class GUI{
         textFieldBase = new JTextField(10);
         textFieldAltezza = new JTextField(10);
         textFieldRaggio = new JTextField(10);
+        textFieldBaseTriangolo = new JTextField(10);
        
         selezionaRettangolo = new JButton("Rettangolo");
         selezionaRettangolo.addActionListener(new ActionListener(){
@@ -74,11 +77,16 @@ public class GUI{
                 labelRaggio.setEnabled(true);
                 labelLato.setEnabled(true);
                 
+                labelBaseTriangolo.setVisible(false);
+                        
                 textFieldLato.setEnabled(true);
                 textFieldRaggio.setEnabled(true);
                 textFieldBase.setEnabled(true);
                 textFieldAltezza.setEnabled(true);
                 
+                textFieldBaseTriangolo.setEnabled(false);
+                textFieldBaseTriangolo.setVisible(false);
+                        
                 labelLato.setText("Lato :");
                 labelBase.setText("Base:");
                 labelAltezza.setText("Altezza:");
@@ -135,13 +143,17 @@ public class GUI{
                 selezionaCerchio.setEnabled(false);
                 selezionaRettangolo.setEnabled(false);
                 
-                labelRaggio.setEnabled(false);
+                labelRaggio.setEnabled(true);
+                textFieldRaggio.setEnabled(true);
                 
-                textFieldRaggio.setEnabled(false);
+                labelBaseTriangolo.setVisible(true);
+                textFieldBaseTriangolo.setVisible(true);
+                
                 
                 labelLato.setText("Lato 1:");
                 labelBase.setText("Lato 2:");
                 labelAltezza.setText("Lato 3:");
+                labelRaggio.setText("Altezza: ");
             }
         });
        
@@ -226,10 +238,12 @@ public class GUI{
         labelBase = new JLabel("Base:");
         labelAltezza = new JLabel("Altezza:");
         labelRaggio = new JLabel("Raggio:");
+        labelBaseTriangolo = new JLabel("Base:");
        
         labelFigura = new JLabel("Figura: null");
         labelPerimetro = new JLabel("Perimetro: null");
         labelArea = new JLabel("Area: null");
+        
        
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
@@ -255,7 +269,10 @@ public class GUI{
         panel.add(textFieldAltezza);
         panel.add(labelRaggio);
         panel.add(textFieldRaggio);
+        panel.add(labelBaseTriangolo);
+        panel.add(textFieldBaseTriangolo);
         panel.add(tornaIndietro);
+        
        
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
