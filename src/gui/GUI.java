@@ -46,6 +46,9 @@ public class GUI{
         textFieldRaggio = new JTextField(10);
         textFieldBaseTriangolo = new JTextField(10);
        
+        textFieldBaseTriangolo.setVisible(false);
+        
+        
         selezionaRettangolo = new JButton("Rettangolo");
         selezionaRettangolo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -87,9 +90,10 @@ public class GUI{
                 textFieldBaseTriangolo.setEnabled(false);
                 textFieldBaseTriangolo.setVisible(false);
                         
-                labelLato.setText("Lato :");
+                labelLato.setText("Lato:");
                 labelBase.setText("Base:");
                 labelAltezza.setText("Altezza:");
+                labelRaggio.setText("Raggio:");
             }
         });
         
@@ -106,6 +110,7 @@ public class GUI{
                 labelBase.setEnabled(false);
                 labelAltezza.setEnabled(false);
                 labelLato.setEnabled(false);
+                
                 
                 textFieldBase.setEnabled(false);
                 textFieldAltezza.setEnabled(false);
@@ -148,7 +153,7 @@ public class GUI{
                 
                 labelBaseTriangolo.setVisible(true);
                 textFieldBaseTriangolo.setVisible(true);
-                
+                textFieldBaseTriangolo.setEnabled(true);
                 
                 labelLato.setText("Lato 1:");
                 labelBase.setText("Lato 2:");
@@ -161,48 +166,45 @@ public class GUI{
         calcoloPerimetro.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                         double perimetro;
-                        double lato = Double.parseDouble(textFieldLato.getText());
-                        double base = Double.parseDouble(textFieldBase.getText());
-                        double altezza = Double.parseDouble(textFieldAltezza.getText());
-                        double raggio = Double.parseDouble(textFieldRaggio.getText());
-                       
+                        
                         switch(Figura){
                             case "Quadrato":
-                                textFieldBase.setEnabled(false);
-                                textFieldAltezza.setEnabled(false);
-                                textFieldRaggio.setEnabled(false);
+                                double lato = Double.parseDouble(textFieldLato.getText());
                                 perimetro = lato*4;
                                 labelPerimetro.setText("Perimetro: " + perimetro);
-                                textFieldBase.setEnabled(true);
-                                textFieldAltezza.setEnabled(true);
-                                textFieldRaggio.setEnabled(true);
+  
                             break;
                             case "Rettangolo":
+                                double base = Double.parseDouble(textFieldBase.getText());
+                                double altezza = Double.parseDouble(textFieldAltezza.getText());
                                 perimetro = (base+altezza)*2;
                                 labelPerimetro.setText("Perimetro: " + perimetro);
                             break;
                             case "Triangolo":
-                                perimetro = lato*3;
+                                double lato1 = Double.parseDouble(textFieldLato.getText());
+                                double lato2 = Double.parseDouble(textFieldBase.getText());
+                                double lato3 = Double.parseDouble(textFieldAltezza.getText());
+                                perimetro = lato1+lato2+lato3;
                                 labelPerimetro.setText("Perimetro: " + perimetro);
                             break;
+                            
                             case "Cerchio":
-                                perimetro = raggio*(2*3.14);
+                                double raggio = Double.parseDouble(textFieldRaggio.getText());
+                                perimetro = (raggio*2)*3.14;
                                 labelPerimetro.setText("Perimetro: " + perimetro);
                             break;
                         }
                     }
                 });
-       
+       /*
+         perimetro = lato+base+altezza;
+        
+        */
         calcoloArea = new JButton("Calcola Area");
         calcoloArea.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                         double area;
-                        
-                        textFieldLato.setEnabled(false);
-                        textFieldBase.setEnabled(false);
-                        textFieldAltezza.setEnabled(false);
-                        textFieldRaggio.setEnabled(false);
                         
                         switch(Figura){
                             case "Quadrato":
@@ -219,11 +221,12 @@ public class GUI{
                                 labelArea.setText("Area: " + area);
                             break;
                             case "Triangolo":
-                                double lato2 = Double.parseDouble(textFieldLato.getText());
-                                double p = (lato2*3)/2;
-                                area = Math.sqrt(p*(p-lato2)*(p-lato2)*(p-lato2));
+                                double altezza1 = Double.parseDouble(textFieldRaggio.getText());
+                                double base1 = Double.parseDouble(textFieldBaseTriangolo.getText());
+                                area = (base1*altezza1)/2;
                                 labelArea.setText("Area: " + area);
                             break;
+                            
                             case "Cerchio":
                                 double raggio = Double.parseDouble(textFieldRaggio.getText());
                                 area = (raggio*raggio)*3.14;
@@ -239,7 +242,8 @@ public class GUI{
         labelAltezza = new JLabel("Altezza:");
         labelRaggio = new JLabel("Raggio:");
         labelBaseTriangolo = new JLabel("Base:");
-       
+        labelBaseTriangolo.setVisible(false);
+        
         labelFigura = new JLabel("Figura: null");
         labelPerimetro = new JLabel("Perimetro: null");
         labelArea = new JLabel("Area: null");
