@@ -14,13 +14,11 @@ public class GUI{
     private JLabel labelBase;
     private JLabel labelAltezza;
     private JLabel labelRaggio;
-    private JLabel labelBaseTriangolo;
     
     private JTextField textFieldLato;
     private JTextField textFieldBase;
     private JTextField textFieldAltezza;
     private JTextField textFieldRaggio;
-    private JTextField textFieldBaseTriangolo;
     
     private JLabel labelFigura;
     private JLabel labelPerimetro;
@@ -36,22 +34,25 @@ public class GUI{
     private JButton calcoloArea;
     private JButton tornaIndietro;
    
-    private GridBagConstraints c;
-   
     GUI(){
         frame = new JFrame();
         textFieldLato = new JTextField(10);
+        textFieldLato.setEnabled(false);
         textFieldBase = new JTextField(10);
+        textFieldBase.setEnabled(false);
         textFieldAltezza = new JTextField(10);
+        textFieldAltezza.setEnabled(false);
         textFieldRaggio = new JTextField(10);
-        textFieldBaseTriangolo = new JTextField(10);
-       
-        textFieldBaseTriangolo.setVisible(false);
+        textFieldRaggio.setEnabled(false);
         
         
         selezionaRettangolo = new JButton("Rettangolo");
         selezionaRettangolo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                calcoloArea.setEnabled(true);
+                calcoloPerimetro.setEnabled(true);
+                tornaIndietro.setEnabled(true);
+                        
                 labelFigura.setText("Figura: " + e.getActionCommand());
                 Figura = e.getActionCommand();
                 
@@ -68,8 +69,13 @@ public class GUI{
         });
         
         tornaIndietro = new JButton("Torna Al Menu");
+        tornaIndietro.setEnabled(false);
         tornaIndietro.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                calcoloArea.setEnabled(false);
+                calcoloPerimetro.setEnabled(false);
+                tornaIndietro.setEnabled(false);
+                
                 selezionaQuadrato.setEnabled(true);
                 selezionaRettangolo.setEnabled(true);
                 selezionaCerchio.setEnabled(true);
@@ -79,27 +85,29 @@ public class GUI{
                 labelAltezza.setEnabled(true);
                 labelRaggio.setEnabled(true);
                 labelLato.setEnabled(true);
-                
-                labelBaseTriangolo.setVisible(false);
                         
                 textFieldLato.setEnabled(true);
                 textFieldRaggio.setEnabled(true);
                 textFieldBase.setEnabled(true);
                 textFieldAltezza.setEnabled(true);
-                
-                textFieldBaseTriangolo.setEnabled(false);
-                textFieldBaseTriangolo.setVisible(false);
                         
                 labelLato.setText("Lato:");
                 labelBase.setText("Base:");
                 labelAltezza.setText("Altezza:");
                 labelRaggio.setText("Raggio:");
+                labelFigura.setText("Figura:");
+                labelPerimetro.setText("Perimetro:");
+                labelArea.setText("Area:");
             }
         });
         
         selezionaCerchio = new JButton("Cerchio");
         selezionaCerchio.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                calcoloArea.setEnabled(true);
+                calcoloPerimetro.setEnabled(true);
+                tornaIndietro.setEnabled(true);
+                        
                 labelFigura.setText("Figura: " + e.getActionCommand());
                 Figura = e.getActionCommand();
                 
@@ -121,6 +129,10 @@ public class GUI{
         selezionaQuadrato = new JButton("Quadrato");
         selezionaQuadrato.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                calcoloArea.setEnabled(true);
+                calcoloPerimetro.setEnabled(true);
+                tornaIndietro.setEnabled(true);
+                        
                 labelFigura.setText("Figura: " + e.getActionCommand());
                 Figura = e.getActionCommand();
                 
@@ -141,6 +153,10 @@ public class GUI{
         selezionaTriangolo = new JButton("Triangolo");
         selezionaTriangolo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                calcoloArea.setEnabled(true);
+                calcoloPerimetro.setEnabled(true);
+                tornaIndietro.setEnabled(true);
+                        
                 labelFigura.setText("Figura: " + e.getActionCommand());
                 Figura = e.getActionCommand();
                 
@@ -148,23 +164,22 @@ public class GUI{
                 selezionaCerchio.setEnabled(false);
                 selezionaRettangolo.setEnabled(false);
                 
-                labelRaggio.setEnabled(true);
-                textFieldRaggio.setEnabled(true);
                 
-                labelBaseTriangolo.setVisible(true);
-                textFieldBaseTriangolo.setVisible(true);
-                textFieldBaseTriangolo.setEnabled(true);
+                labelRaggio.setEnabled(false);
+                
+                textFieldRaggio.setEnabled(false);
                 
                 labelLato.setText("Lato 1:");
                 labelBase.setText("Lato 2:");
                 labelAltezza.setText("Lato 3:");
-                labelRaggio.setText("Altezza: ");
             }
         });
        
         calcoloPerimetro = new JButton("Calcola Perimetro");
+        calcoloPerimetro.setEnabled(false);
         calcoloPerimetro.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
+                        
                         double perimetro;
                         
                         switch(Figura){
@@ -201,6 +216,7 @@ public class GUI{
         
         */
         calcoloArea = new JButton("Calcola Area");
+        calcoloArea.setEnabled(false);
         calcoloArea.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
@@ -221,10 +237,17 @@ public class GUI{
                                 labelArea.setText("Area: " + area);
                             break;
                             case "Triangolo":
-                                double altezza1 = Double.parseDouble(textFieldRaggio.getText());
-                                double base1 = Double.parseDouble(textFieldBaseTriangolo.getText());
-                                area = (base1*altezza1)/2;
-                                labelArea.setText("Area: " + area);
+                                double lato1 = Double.parseDouble(textFieldLato.getText());
+                                double lato2 = Double.parseDouble(textFieldBase.getText());
+                                double lato3 = Double.parseDouble(textFieldAltezza.getText());
+                                if(lato1+lato2>lato3){
+                                    labelArea.setText("Area: ERRORE");
+                                }else{
+                                    double p = lato1 + lato2 + lato3;
+                                
+                                    area = Math.sqrt(p*(p-lato1)*(p-lato2)*(p-lato3));
+                                    labelArea.setText("Area: " + area);
+                                }
                             break;
                             
                             case "Cerchio":
@@ -241,12 +264,10 @@ public class GUI{
         labelBase = new JLabel("Base:");
         labelAltezza = new JLabel("Altezza:");
         labelRaggio = new JLabel("Raggio:");
-        labelBaseTriangolo = new JLabel("Base:");
-        labelBaseTriangolo.setVisible(false);
         
-        labelFigura = new JLabel("Figura: null");
-        labelPerimetro = new JLabel("Perimetro: null");
-        labelArea = new JLabel("Area: null");
+        labelFigura = new JLabel("Figura:");
+        labelPerimetro = new JLabel("Perimetro:");
+        labelArea = new JLabel("Area:");
         
        
         JPanel panel = new JPanel(new GridBagLayout());
@@ -273,8 +294,6 @@ public class GUI{
         panel.add(textFieldAltezza);
         panel.add(labelRaggio);
         panel.add(textFieldRaggio);
-        panel.add(labelBaseTriangolo);
-        panel.add(textFieldBaseTriangolo);
         panel.add(tornaIndietro);
         
        
