@@ -60,11 +60,11 @@ public class GUI{
                 selezionaCerchio.setEnabled(false);
                 selezionaTriangolo.setEnabled(false);
                 
-                labelLato.setEnabled(false);
-                labelRaggio.setEnabled(false);
+                labelBase.setEnabled(true);
+                labelAltezza.setEnabled(true);
                 
-                textFieldLato.setEnabled(false);
-                textFieldRaggio.setEnabled(false);
+                textFieldBase.setEnabled(true);
+                textFieldAltezza.setEnabled(true);
             }
         });
         
@@ -81,15 +81,20 @@ public class GUI{
                 selezionaCerchio.setEnabled(true);
                 selezionaTriangolo.setEnabled(true);
                 
-                labelBase.setEnabled(true);
-                labelAltezza.setEnabled(true);
-                labelRaggio.setEnabled(true);
-                labelLato.setEnabled(true);
+                labelBase.setEnabled(false);
+                labelAltezza.setEnabled(false);
+                labelRaggio.setEnabled(false);
+                labelLato.setEnabled(false);
                         
-                textFieldLato.setEnabled(true);
-                textFieldRaggio.setEnabled(true);
-                textFieldBase.setEnabled(true);
-                textFieldAltezza.setEnabled(true);
+                textFieldLato.setEnabled(false);
+                textFieldRaggio.setEnabled(false);
+                textFieldBase.setEnabled(false);
+                textFieldAltezza.setEnabled(false);
+                
+                textFieldLato.setText("");
+                textFieldRaggio.setText("");
+                textFieldBase.setText("");
+                textFieldAltezza.setText("");
                         
                 labelLato.setText("Lato:");
                 labelBase.setText("Base:");
@@ -115,14 +120,9 @@ public class GUI{
                 selezionaRettangolo.setEnabled(false);
                 selezionaTriangolo.setEnabled(false);
                 
-                labelBase.setEnabled(false);
-                labelAltezza.setEnabled(false);
-                labelLato.setEnabled(false);
+                labelRaggio.setEnabled(true);
+                textFieldRaggio.setEnabled(true);
                 
-                
-                textFieldBase.setEnabled(false);
-                textFieldAltezza.setEnabled(false);
-                textFieldLato.setEnabled(false);
             }
         });
        
@@ -132,7 +132,9 @@ public class GUI{
                 calcoloArea.setEnabled(true);
                 calcoloPerimetro.setEnabled(true);
                 tornaIndietro.setEnabled(true);
-                        
+                labelLato.setEnabled(true);
+                textFieldLato.setEnabled(true);
+                
                 labelFigura.setText("Figura: " + e.getActionCommand());
                 Figura = e.getActionCommand();
                 
@@ -164,10 +166,13 @@ public class GUI{
                 selezionaCerchio.setEnabled(false);
                 selezionaRettangolo.setEnabled(false);
                 
+                labelLato.setEnabled(true);
+                labelBase.setEnabled(true);
+                labelAltezza.setEnabled(true);
                 
-                labelRaggio.setEnabled(false);
-                
-                textFieldRaggio.setEnabled(false);
+                textFieldLato.setEnabled(true);
+                textFieldBase.setEnabled(true);
+                textFieldAltezza.setEnabled(true);
                 
                 labelLato.setText("Lato 1:");
                 labelBase.setText("Lato 2:");
@@ -187,7 +192,6 @@ public class GUI{
                                 double lato = Double.parseDouble(textFieldLato.getText());
                                 perimetro = lato*4;
                                 labelPerimetro.setText("Perimetro: " + perimetro);
-  
                             break;
                             case "Rettangolo":
                                 double base = Double.parseDouble(textFieldBase.getText());
@@ -226,9 +230,7 @@ public class GUI{
                             case "Quadrato":
                                 double lato = Double.parseDouble(textFieldLato.getText());
                                 area = lato*lato;
-                                labelArea.setText("Area: " + area);
-                                
-                                
+                                labelArea.setText("Area: " + area); 
                             break;
                             case "Rettangolo":
                                 double base = Double.parseDouble(textFieldBase.getText());
@@ -261,9 +263,13 @@ public class GUI{
         );
        
         labelLato = new JLabel("Lato:");
+        labelLato.setEnabled(false);
         labelBase = new JLabel("Base:");
+        labelBase.setEnabled(false);
         labelAltezza = new JLabel("Altezza:");
+        labelAltezza.setEnabled(false);
         labelRaggio = new JLabel("Raggio:");
+        labelRaggio.setEnabled(false);
         
         labelFigura = new JLabel("Figura:");
         labelPerimetro = new JLabel("Perimetro:");
