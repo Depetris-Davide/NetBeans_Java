@@ -203,8 +203,17 @@ public class GUI{
                                 double lato1 = Double.parseDouble(textFieldLato.getText());
                                 double lato2 = Double.parseDouble(textFieldBase.getText());
                                 double lato3 = Double.parseDouble(textFieldAltezza.getText());
-                                perimetro = lato1+lato2+lato3;
-                                labelPerimetro.setText("Perimetro: " + perimetro);
+                                
+                                System.out.println(lato1+lato2 > lato3);
+                                System.out.println(lato2+lato3 > lato1);
+                                System.out.println(lato3+lato1 > lato2);
+                                if(!(lato1+lato2 > lato3) || !(lato2+lato3 > lato1) || !(lato3+lato1 > lato2)) {
+                                   labelPerimetro.setText("Perimetro: ERRORE");
+                                } else {
+                                   perimetro = lato1+lato2+lato3;
+                                   labelPerimetro.setText("Perimetro: " + perimetro); 
+                                }
+                                
                             break;
                             
                             case "Cerchio":
@@ -242,13 +251,13 @@ public class GUI{
                                 double lato1 = Double.parseDouble(textFieldLato.getText());
                                 double lato2 = Double.parseDouble(textFieldBase.getText());
                                 double lato3 = Double.parseDouble(textFieldAltezza.getText());
-                                if(lato1+lato2>lato3){
+                                if(!(lato1+lato2 > lato3) || !(lato2+lato3 > lato1) || !(lato3+lato1 > lato2)){
                                     labelArea.setText("Area: ERRORE");
                                 }else{
                                     double p = lato1 + lato2 + lato3;
                                 
                                     area = Math.sqrt(p*(p-lato1)*(p-lato2)*(p-lato3));
-                                    labelArea.setText("Area: " + area);
+                                    labelArea.setText("Area: " + (float)area);
                                 }
                             break;
                             
