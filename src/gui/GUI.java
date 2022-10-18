@@ -203,11 +203,64 @@ public class GUI{
                                 double lato1 = Double.parseDouble(textFieldLato.getText());
                                 double lato2 = Double.parseDouble(textFieldBase.getText());
                                 double lato3 = Double.parseDouble(textFieldAltezza.getText());
-                                
-                                System.out.println(lato1+lato2 > lato3);
-                                System.out.println(lato2+lato3 > lato1);
-                                System.out.println(lato3+lato1 > lato2);
-                                if(!(lato1+lato2 > lato3) || !(lato2+lato3 > lato1) || !(lato3+lato1 > lato2)) {
+                                double latoGrande = 0;
+                                double latoPiccolo = 0;
+                                boolean calcola = false;
+                                if (lato1 <= lato2 && lato1 <= lato3) {
+                                    latoPiccolo = lato1;
+                                    
+                                    if (lato2 > lato3) {
+                                        latoGrande = lato2;
+                                        if (latoPiccolo + lato3 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    } else {
+                                        latoGrande = lato3;
+                                        if (latoPiccolo + lato2 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    }  
+                                } else if (lato2 <= lato1 && lato2<= lato3) {
+                                    latoPiccolo = lato2;
+                                    if (lato1 > lato3) {
+                                        latoGrande = lato1;
+                                        if (latoPiccolo + lato3 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    } else {
+                                        latoGrande = lato3;
+                                        if (latoPiccolo + lato1 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    }
+                                } else if (lato3 <= lato1 && lato3<= lato2) {
+                                    latoPiccolo = lato3;
+                                    if (lato2 > lato1) {
+                                        latoGrande = lato2;
+                                        if ((latoPiccolo + lato1) >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    } else {
+                                        latoGrande = lato1;
+                                        if ((latoPiccolo + lato2) >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    }
+                                }
+
+                                if(!calcola) {
                                    labelPerimetro.setText("Perimetro: ERRORE");
                                 } else {
                                    perimetro = lato1+lato2+lato3;
@@ -251,7 +304,64 @@ public class GUI{
                                 double lato1 = Double.parseDouble(textFieldLato.getText());
                                 double lato2 = Double.parseDouble(textFieldBase.getText());
                                 double lato3 = Double.parseDouble(textFieldAltezza.getText());
-                                if(!(lato1+lato2 > lato3) || !(lato2+lato3 > lato1) || !(lato3+lato1 > lato2)){
+                                double latoGrande = 0;
+                                double latoPiccolo = 0;
+                                boolean calcola = false;
+                                if (lato1 <= lato2 && lato1 <= lato3) {
+                                    latoPiccolo = lato1;
+                                    
+                                    if (lato2 > lato3) {
+                                        latoGrande = lato2;
+                                        if (latoPiccolo + lato3 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    } else {
+                                        latoGrande = lato3;
+                                        if (latoPiccolo + lato2 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    }  
+                                } else if (lato2 <= lato1 && lato2<= lato3) {
+                                    latoPiccolo = lato2;
+                                    if (lato1 > lato3) {
+                                        latoGrande = lato1;
+                                        if (latoPiccolo + lato3 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    } else {
+                                        latoGrande = lato3;
+                                        if (latoPiccolo + lato1 >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    }
+                                } else if (lato3 <= lato1 && lato3<= lato2) {
+                                    latoPiccolo = lato3;
+                                    if (lato2 > lato1) {
+                                        latoGrande = lato2;
+                                        if ((latoPiccolo + lato1) >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    } else {
+                                        latoGrande = lato1;
+                                        if ((latoPiccolo + lato2) >= latoGrande) {
+                                            calcola = false;
+                                        } else {
+                                            calcola = true;
+                                        }
+                                    }
+                                }
+                                
+                                if(!calcola){
                                     labelArea.setText("Area: ERRORE");
                                 }else{
                                     double p = lato1 + lato2 + lato3;
