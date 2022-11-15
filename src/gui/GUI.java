@@ -49,7 +49,7 @@ public class GUI{
         selezionaRettangolo = new JButton("Rettangolo");
         selezionaRettangolo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                calcoloArea.setEnabled(true);
+                calcoloArea.setEnabled(true);//commento
                 calcoloPerimetro.setEnabled(true);
                 tornaIndietro.setEnabled(true);
                         
